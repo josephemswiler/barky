@@ -1,21 +1,42 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { testAction } from './actions/testAction'
+
+const mapStateToProps = state => ({
+  ...state
+})
+
+const mapDispatchToProps = dispatch => ({
+  testAction: () => dispatch(testAction())
+})
 
 class App extends Component {
-  render() {
+  styles = {
+    app: {
+      background: 'red',
+      fontFamily: `'Montserrat', sans-serif`
+    }
+  }
+
+  testAction = event => {
+    this.props.testAction()
+  }
+
+  render () {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+      <div style={this.styles.app}>
+        <header>
+          <h1>Welcome to React</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+        <p>
+          <pre>
+            {JSON.stringify(this.props)}
+          </pre>
+          <button onClick={this.testAction}>Test redux action</button>
         </p>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App)
