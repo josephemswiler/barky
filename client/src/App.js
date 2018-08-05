@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { testAction } from './actions/testAction'
 
+import BioCard from './components/BioCard'
+
 const mapStateToProps = state => ({
   ...state
 })
@@ -13,7 +15,6 @@ const mapDispatchToProps = dispatch => ({
 class App extends Component {
   styles = {
     app: {
-      background: 'red',
       fontFamily: `'Montserrat', sans-serif`
     }
   }
@@ -28,12 +29,7 @@ class App extends Component {
         <header>
           <h1>Welcome to React</h1>
         </header>
-        <p>
-          <pre>
-            {JSON.stringify(this.props)}
-          </pre>
-          <button onClick={this.testAction}>Test redux action</button>
-        </p>
+        <BioCard />
       </div>
     )
   }
